@@ -1,11 +1,13 @@
- import 'package:fd_calculator/resusable_widgets.dart';
+import 'package:fd_calculator/home.dart';
+import 'package:fd_calculator/resusable_widgets.dart';
 import 'package:flutter/material.dart';
 
- BoxDecoration finalBoxDecoration() {
-    return BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      color: const Color.fromRGBO(54, 163, 110, 100));
-  }
+BoxDecoration finalBoxDecoration() {
+  return BoxDecoration(
+      borderRadius: BorderRadius.circular(20),
+      color: const Color.fromRGBO(54, 163, 110, 100));
+}
+
 class FinalBoxSizedBox extends StatelessWidget {
   const FinalBoxSizedBox({
     super.key,
@@ -27,6 +29,10 @@ class ClearButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
+      borderRadius: BorderRadius.circular(90),
+      onTap: () {
+        isCalculatePressed.value = false;
+      },
       child: Ink(
         width: mediaqueryWidth(0.35, context),
         height: mediaqueryHeight(0.05, context),
@@ -35,10 +41,7 @@ class ClearButton extends StatelessWidget {
             borderRadius: BorderRadius.circular(90)),
         child: Center(
           child: myText(
-              "CLEAR",
-              mediaqueryHeight(0.02, context),
-              kufam,
-              Colors.white),
+              "CLEAR", mediaqueryHeight(0.02, context), kufam, Colors.white),
         ),
       ),
     );
@@ -53,6 +56,10 @@ class CalculateButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
+      borderRadius: BorderRadius.circular(90),
+      onTap: () {
+        isCalculatePressed.value = true;
+      },
       child: Ink(
         width: mediaqueryWidth(0.45, context),
         height: mediaqueryHeight(0.05, context),
@@ -60,10 +67,7 @@ class CalculateButton extends StatelessWidget {
             color: const Color.fromRGBO(54, 163, 110, 100),
             borderRadius: BorderRadius.circular(90)),
         child: Center(
-          child: myText(
-              "CALCULATE",
-              mediaqueryHeight(0.02, context),
-              kufam,
+          child: myText("CALCULATE", mediaqueryHeight(0.02, context), kufam,
               Colors.white),
         ),
       ),
@@ -96,24 +100,26 @@ textFields(String heading, context) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
-      myText(heading, mediaqueryHeight(0.018, context), koho, Colors.white,),
+      myText(
+        heading,
+        mediaqueryHeight(0.018, context),
+        koho,
+        Colors.white,
+      ),
       SizedBox(height: mediaqueryHeight(0.01, context)),
       TextFormField(
         cursorColor: Colors.black,
         keyboardType: TextInputType.number,
         decoration: InputDecoration(
-          
-          contentPadding: EdgeInsets.symmetric(vertical:10,horizontal: 10),
+            contentPadding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
             filled: true,
             fillColor: const Color.fromRGBO(202, 238, 243, 100),
             border: OutlineInputBorder(
-            
                 borderSide: const BorderSide(
                     strokeAlign: BorderSide.strokeAlignOutside),
                 borderRadius:
                     BorderRadius.circular(mediaqueryWidth(0.03, context))),
             focusedBorder: const OutlineInputBorder(
-              
                 borderSide:
                     BorderSide(color: Color.fromARGB(255, 24, 216, 139)))),
       )
