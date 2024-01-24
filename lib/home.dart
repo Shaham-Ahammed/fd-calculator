@@ -36,8 +36,61 @@ class Home extends StatelessWidget {
                   textFields("ANNUAL INTEREST RATE", context),
                    SizedBox(height: mediaqueryHeight(0.025, context),),
                   textFields("MONTHS", context),
+                  SizedBox(height: mediaqueryHeight(0.04, context),),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      InkWell(
+                        child: Ink(
+                          width: mediaqueryWidth(0.45,context),
+                          height: mediaqueryHeight(0.05, context),
+                        decoration: BoxDecoration(color: Color.fromRGBO(54, 163, 110, 100),borderRadius: BorderRadius.circular(90)),
+                          child: Center(child: myText("CALCULATE", mediaqueryHeight(0.02, context),kufam , Colors.white),),
+                        ),
+                        
+                      ),
+                      InkWell(
+                        child: Ink(
+                          width: mediaqueryWidth(0.35,context),
+                          height: mediaqueryHeight(0.05, context),
+                        decoration: BoxDecoration(color: Color.fromRGBO(41, 163, 197, 0.612),borderRadius: BorderRadius.circular(90)),
+                          child: Center(child: myText("CLEAR", mediaqueryHeight(0.02, context),kufam , Colors.white),),
+                        ),),
+
+                    ],
+                  ),
+                 SizedBox(height: mediaqueryHeight(0.05, context),),
+                 Container(
+                         width: double.infinity,      
+                  height: mediaqueryHeight(0.25,context),
+
+                  decoration: BoxDecoration(
+                    
+                    borderRadius: BorderRadius.circular(20),
+                    color: Color.fromRGBO(54, 163, 110, 100)
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(12.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        myText("TOTAL INTEREST", mediaqueryHeight(0.018, context), koho, Colors.white),
+                        SizedBox(height: mediaqueryHeight(0.01, context),),
+                    myText("₹4343.00", mediaqueryHeight(0.028, context), koho, Colors.white,FontWeight.bold)  
+                     , SizedBox(height: mediaqueryHeight(0.01, context),),
+                     Divider(),
+                     SizedBox(height: mediaqueryHeight(0.01, context),),
+                      myText("TOTAL AMOUNT", mediaqueryHeight(0.018, context), koho, Colors.white),
+                       SizedBox(height: mediaqueryHeight(0.01, context),),
+                        myText("₹4343.00", mediaqueryHeight(0.028, context), koho, Colors.white,FontWeight.bold)  
+
+                      ],
+                    ),
+                  ),
+                 )    
                 ],
               ),
+              
             )
                     ],
                   ),
