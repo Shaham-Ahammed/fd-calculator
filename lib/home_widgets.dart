@@ -1,6 +1,12 @@
+import 'package:fd_calculator/fd_operations.dart';
 import 'package:fd_calculator/home.dart';
 import 'package:fd_calculator/resusable_widgets.dart';
 import 'package:flutter/material.dart';
+
+TextEditingController amountController = TextEditingController();
+TextEditingController irContrller = TextEditingController();
+TextEditingController monthsController = TextEditingController();
+GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
 BoxDecoration finalBoxDecoration() {
   return BoxDecoration(
@@ -32,6 +38,9 @@ class ClearButton extends StatelessWidget {
       borderRadius: BorderRadius.circular(90),
       onTap: () {
         isCalculatePressed.value = false;
+        irContrller.text = "";
+        amountController.text = "";
+        monthsController.text = "";
       },
       child: Ink(
         width: mediaqueryWidth(0.35, context),
@@ -58,7 +67,16 @@ class CalculateButton extends StatelessWidget {
     return InkWell(
       borderRadius: BorderRadius.circular(90),
       onTap: () {
-        isCalculatePressed.value = true;
+        isCalculatePressed.value = false;
+        if (formKey.currentState!.validate()) {
+          amount = double.parse(amountController.text);
+          interestRate = double.parse(irContrller.text);
+          months = int.parse(monthsController.text);
+          calculateInterest(amount!, interestRate!, months!);
+          isCalculatePressed.value = true;
+        } else {
+          return;
+        }
       },
       child: Ink(
         width: mediaqueryWidth(0.45, context),
@@ -96,7 +114,8 @@ class Appbar extends StatelessWidget {
   }
 }
 
-textFields(String heading, context) {
+textFields(
+    String heading, context, int maxLength, TextEditingController controller) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
@@ -108,10 +127,29 @@ textFields(String heading, context) {
       ),
       SizedBox(height: mediaqueryHeight(0.01, context)),
       TextFormField(
+        autovalidateMode: AutovalidateMode.onUserInteraction,
+        validator: (value) {
+          if (value == null || value.isEmpty || value == "") {
+            return "please enter a value";
+          }
+          if (heading == "MONTHS") {
+            try {
+              int.parse(value);
+              return null;
+            } catch (e) {
+              return "enter a valid integer";
+            }
+          }
+          return null;
+        },
+        controller: controller,
+        maxLength: maxLength,
         cursorColor: Colors.black,
         keyboardType: TextInputType.number,
         decoration: InputDecoration(
-            contentPadding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+            counterText: '',
+            contentPadding:
+                const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
             filled: true,
             fillColor: const Color.fromRGBO(202, 238, 243, 100),
             border: OutlineInputBorder(
